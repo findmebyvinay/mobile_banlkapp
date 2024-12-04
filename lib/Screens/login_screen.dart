@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
           return const CircularProgressIndicator();
         }
         else {
-          return Padding(padding: EdgeInsets.all(8),
+          return Padding(padding:const EdgeInsets.all(8),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child:const  Text('Forgot password?',
                                   style: TextStyle(
                                     fontSize: 15,
-                                    color: Colors.blueAccent,
+                                    color: Colors.green,
                                     fontWeight: FontWeight.bold
                                   ),),
                                 )
