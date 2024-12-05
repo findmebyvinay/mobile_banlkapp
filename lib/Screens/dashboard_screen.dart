@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  String username;
+  double balance;
+ DashboardScreen(this.username,this.balance,{ super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,19 +73,27 @@ class DashboardScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                width: 80,
-                height: 50,
-                 decoration: BoxDecoration(
-                gradient:const LinearGradient(colors: [
-                  Color.fromRGBO(66, 238, 126, 1),
-                  Color.fromRGBO(141, 249, 179, 1),
-            
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight),
-                borderRadius: BorderRadius.circular(8)
-              ),
+              InkWell(
+                onTap: (){},
+                child: Container(
+                  width: 80,
+                  height: 50,
+                   decoration: BoxDecoration(
+                  gradient:const LinearGradient(colors: [
+                    Color.fromRGBO(242, 246, 243, 1),
+                    Color.fromRGBO(141, 249, 179, 1),
+                            
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight),
+                  borderRadius: BorderRadius.circular(8)
+                ),
+                child:IconButton(onPressed: (){},
+                hoverColor: Colors.greenAccent,
+                 icon:Icon(Icons.payment,
+                
+                color: Colors.green,))
+                ),
               ),
               const SizedBox(width:20,),
                Container(
@@ -119,6 +129,11 @@ class DashboardScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+      bottomNavigationBar: BottomNavigationBar(items:[
+        BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Home',
+        backgroundColor: Colors.green),
+         BottomNavigationBarItem(icon: Icon(Icons.qr_code),label: 'Qr pay',
+        backgroundColor: Colors.green)]
+    ));
   }
 }

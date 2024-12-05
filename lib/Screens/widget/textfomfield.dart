@@ -7,12 +7,20 @@ class Textformfield extends StatelessWidget {
   bool obscureText;
   String hint;
   String label;
-  Textformfield({required this.keyboardtype, required this.focusnode, required this.prefixIcon, required this.obscureText, required this.hint,required this.label, super.key});
+  TextEditingController? controller;
+  Textformfield({required this.controller,
+   required this.keyboardtype,
+    required this.focusnode,
+     required this.prefixIcon,
+      required this.obscureText,
+       required this.hint,
+       required this.label, super.key});
   
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      controller:controller ,
         keyboardType: keyboardtype,
                      focusNode: focusnode,
                       obscureText: obscureText,

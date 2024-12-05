@@ -11,12 +11,15 @@ class LoginScreen extends StatefulWidget {
    LoginScreen({super.key});
   final  emailFocusnode = FocusNode();
   final passwordFocusnode = FocusNode();
+ 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
+  final usernameController = TextEditingController();
+   final passwordController = TextEditingController();
   Widget build(BuildContext context) {
     return BlocProvider(create: (context)=> AuthBloc(),
     child: Scaffold(
@@ -32,7 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
       body:BlocConsumer<AuthBloc,AuthState>(
        listener:(context,state){
         if(state is AuthAuthenticated){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>DashboardScreen()));
+          Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context)=>DashboardScreen(
+            state.username,state.amount
+          )));
+
         }
         else if(state is AuthError){
           ScaffoldMessenger.of(context).showSnackBar((SnackBar(content:Text(state.message))));
@@ -75,7 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                        Textformfield(keyboardtype: TextInputType.emailAddress,
+                        Textformfield(
+                          controller:usernameController ,
+                          keyboardtype: TextInputType.emailAddress,
                          focusnode: FocusNode(),
                           prefixIcon:const Icon(Icons.mail),
                            obscureText: false,
@@ -83,7 +92,9 @@ class _LoginScreenState extends State<LoginScreen> {
                              label:'user'),
                             const SizedBox(height: 15,),
 
-                             Textformfield(keyboardtype: TextInputType.visiblePassword,
+                             Textformfield(
+                              controller: passwordController,
+                              keyboardtype: TextInputType.visiblePassword,
                          focusnode: FocusNode(),
                           prefixIcon:const Icon(Icons.key),
                            obscureText: true,
@@ -106,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                              ),
                              const SizedBox(height: 20,),
                              Button(onPressed: (){
-                              Navigator.push(context,MaterialPageRoute(builder:(context)=>DashboardScreen()));
+                              Navigator.push(context,MaterialPageRoute(builder:(context)=>DashboardScreen('SJS',500)));
                              }, text:'Login'),
                               const SizedBox(height: 10,),
                              const Text('Don\'t have an Account?')
